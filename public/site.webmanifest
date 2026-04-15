@@ -1,0 +1,12 @@
+{
+  "name": "Red Rose Cosmetic Shop",
+  "short_name": "Red Rose",
+  "description": "Premium cosmetics & beauty products",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#be123c",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any" }
+  ]
+}
