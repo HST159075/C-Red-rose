@@ -2,14 +2,13 @@
 
 import axios from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://s-redrose-1.onrender.com";
 
 export const api = axios.create({
   baseURL: `${API_URL}/api`,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
-    Origin: process.env.NEXT_PUBLIC_APP_URL || "https://red-rose-seven.vercel.app",
   },
 });
 

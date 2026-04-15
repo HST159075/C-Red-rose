@@ -29,8 +29,8 @@ export async function middleware(request: NextRequest) {
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: blob: http://localhost:5000 https://lh3.googleusercontent.com",
-      "connect-src 'self' http://localhost:5000",
+      "img-src 'self' data: blob: https://s-redrose-1.onrender.com https://lh3.googleusercontent.com",
+      "connect-src 'self' http://localhost:5000 https://s-redrose-1.onrender.com",
     ].join("; "),
   );
 
