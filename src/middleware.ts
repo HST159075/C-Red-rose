@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: blob: https://s-redrose-1.onrender.com https://lh3.googleusercontent.com",
-      "connect-src 'self' http://localhost:5000 https://s-redrose-1.onrender.com",
+     "connect-src 'self' https://s-redrose-1.onrender.com https://lh3.googleusercontent.com",
     ].join("; "),
   );
 
