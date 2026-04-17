@@ -1,30 +1,30 @@
 // src/lib/api.ts
-
 import axios from "axios";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://s-redrose-1.onrender.com";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://s-redrose-1.onrender.com";
 
 export const api = axios.create({
   baseURL: `${API_URL}/api`,
   withCredentials: true,
+  // ❌ Origin header manually set করা যাবে না — browser block করে
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// ── Products ───────────────────────────────────────────────────
+// ── Products ──────────────────────────────────────────────────
 export const productApi = {
-  getAll: (params?: Record<string, string>) =>
-    api.get("/products", { params }),
+  getAll: (params?: Record<string, string>) => api.get("/products", { params }),
   getBySlug: (slug: string) => api.get(`/products/${slug}`),
 };
 
-// ── Categories ─────────────────────────────────────────────────
+// ── Categories ────────────────────────────────────────────────
 export const categoryApi = {
   getAll: () => api.get("/categories"),
 };
 
-// ── Cart ───────────────────────────────────────────────────────
+// ── Cart ──────────────────────────────────────────────────────
 export const cartApi = {
   get: () => api.get("/cart"),
   add: (productId: string, quantity: number) =>
@@ -35,7 +35,7 @@ export const cartApi = {
   clear: () => api.delete("/cart"),
 };
 
-// ── Orders ─────────────────────────────────────────────────────
+// ── Orders ────────────────────────────────────────────────────
 export const orderApi = {
   create: (data: {
     items: { productId: string; quantity: number }[];
@@ -50,14 +50,14 @@ export const orderApi = {
   cancel: (id: string) => api.patch(`/orders/${id}/cancel`),
 };
 
-// ── Reviews ────────────────────────────────────────────────────
+// ── Reviews ───────────────────────────────────────────────────
 export const reviewApi = {
   add: (data: { productId: string; rating: number; comment?: string }) =>
     api.post("/reviews", data),
   delete: (id: string) => api.delete(`/reviews/${id}`),
 };
 
-// ── User ───────────────────────────────────────────────────────
+// ── User ──────────────────────────────────────────────────────
 export const userApi = {
   getProfile: () => api.get("/user/profile"),
   updateProfile: (data: FormData) =>
@@ -66,11 +66,9 @@ export const userApi = {
     }),
 };
 
-// ── Admin ──────────────────────────────────────────────────────
+// ── Admin ─────────────────────────────────────────────────────
 export const adminApi = {
   getDashboard: () => api.get("/admin/dashboard"),
-
-  // Products
   createProduct: (data: FormData) =>
     api.post("/admin/products", data, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -80,8 +78,6 @@ export const adminApi = {
       headers: { "Content-Type": "multipart/form-data" },
     }),
   deleteProduct: (id: string) => api.delete(`/admin/products/${id}`),
-
-  // Categories
   createCategory: (data: FormData) =>
     api.post("/admin/categories", data, {
       headers: { "Content-Type": "multipart/form-data" },
@@ -91,21 +87,17 @@ export const adminApi = {
       headers: { "Content-Type": "multipart/form-data" },
     }),
   deleteCategory: (id: string) => api.delete(`/admin/categories/${id}`),
-
-  // Orders
   getAllOrders: (params?: Record<string, string>) =>
     api.get("/admin/orders", { params }),
   updateOrderStatus: (id: string, status: string) =>
     api.put(`/admin/orders/${id}/status`, { status }),
-
-  // Users
   getAllUsers: (params?: Record<string, string>) =>
     api.get("/admin/users", { params }),
   changeRole: (id: string, role: string) =>
     api.put(`/admin/users/${id}/role`, { role }),
 };
 
-// ── Image URL helper ───────────────────────────────────────────
+// ── Image URL ─────────────────────────────────────────────────
 export const getImageUrl = (filename: string | null | undefined): string => {
   if (!filename) return "/placeholder.jpg";
   if (filename.startsWith("http")) return filename;
